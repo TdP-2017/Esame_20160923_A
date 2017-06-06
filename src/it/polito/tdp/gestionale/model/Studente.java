@@ -1,11 +1,8 @@
 package it.polito.tdp.gestionale.model;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Studente extends Nodo{
 
-public class Studente {
-
-	private List<Corso> corsi;
+//	private List<Corso> corsi;
 	private int matricola;
 	private String cognome;
 	private String nome;
@@ -63,14 +60,43 @@ public class Studente {
 		this.cds = cds;
 	}
 
-	public List<Corso> getCorsi() {
-		if (corsi == null) {
-			return new ArrayList<Corso>();
-		}
-		return corsi;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + matricola;
+		return result;
 	}
 
-	public void setCorsi(List<Corso> corsi) {
-		this.corsi = corsi;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Studente other = (Studente) obj;
+		if (matricola != other.matricola)
+			return false;
+		return true;
 	}
+
+	@Override
+	public String toString() {
+		return cognome;
+	}
+
+//	public List<Corso> getCorsi() {
+//		if (corsi == null) {
+//			return new ArrayList<Corso>();
+//		}
+//		return corsi;
+//	}
+//
+//	public void setCorsi(List<Corso> corsi) {
+//		this.corsi = corsi;
+//	}
+	
+	
 }

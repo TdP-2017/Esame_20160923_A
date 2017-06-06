@@ -26,7 +26,7 @@ public class TestDAO {
 		
 		// Completo le informazioni di un corso
 		Corso corso = new Corso("01KSUPG");
-		dDAO.getStudentiIscrittiAlCorso(corso, mapStudenti);
+		dDAO.setStudentiIscrittiAlCorso(corso, mapStudenti);
 		System.out.println(corso.getStudenti());
 	}
 
