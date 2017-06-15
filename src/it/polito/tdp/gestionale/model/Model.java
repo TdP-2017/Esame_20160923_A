@@ -2,6 +2,7 @@ package it.polito.tdp.gestionale.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -87,5 +88,41 @@ public class Model {
 		}
 
 		return statCorsi;
+	}
+	
+	List<Corso> findMinimalSet(){
+		List<Corso> soluzioneParziale = new ArrayList<Corso>();
+		List<Corso> soluzioneMigliore = new ArrayList<Corso>();
+		
+		recursive(soluzioneParziale, soluzioneMigliore);
+		
+		return soluzioneMigliore;
+	}
+	
+	void recursive(List<Corso> soluzioneParziale, List<Corso> soluzioneMigliore) {
+		
+//		System.out.println(soluzioneParziale);
+		
+		HashSet<Studente> hashSetStudenti = new HashSet<Studente>(getTuttiStudenti());
+		for (Corso corso : soluzioneParziale) {
+			hashSetStudenti.removeAll(corso.getStudenti());
+		}
+		if (hashSetStudenti.isEmpty()) {
+			if (soluzioneMigliore.isEmpty())
+				soluzioneMigliore.addAll(soluzioneParziale);
+			if (soluzioneParziale.size() < soluzioneMigliore.size()){
+				soluzioneMigliore.clear();
+				soluzioneMigliore.addAll(soluzioneParziale);
+			}
+		}
+		
+		for (Corso corso : getTuttiCorsi()) {
+			if (soluzioneParziale.isEmpty() || corso.compareTo(soluzioneParziale.get(soluzioneParziale.size()-1)) > 0) {
+				soluzioneParziale.add(corso);
+				recursive(soluzioneParziale, soluzioneMigliore);
+				soluzioneParziale.remove(corso);
+			}
+		}
+		
 	}
 }

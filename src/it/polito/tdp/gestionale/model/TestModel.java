@@ -16,6 +16,8 @@ public class TestModel {
 			System.out.format("Numero di studenti che seguono %d corsi: %d\n", counter, i);
 			counter++;
 		}
+		
+		System.out.println(model.findMinimalSet());
 	}
 
 }
